@@ -1,0 +1,10 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: SDK
+metadata:
+  name: funk-go-sdk
+spec:
+  dependencies:
+    - name: "foo"
+      description: "bar"
+  config:
+    linecomment: "//"
