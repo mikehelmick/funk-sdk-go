@@ -8,6 +8,8 @@ spec:
       mkdir: "cmd"
     - name: "Create pkg directory"
       mkdir: "pkg"
+    - name: "Create config directory"
+      mkdir: "config"
     - name: "Initialize dep"
       exec: "dep init"
     - name: "Create README.md"
