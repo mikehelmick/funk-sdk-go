@@ -7,6 +7,7 @@ import (
 	"log"
 
   "github.com/mikehelmick/play/pkg/funks"
+  "github.com/mikehelmick/play/pkg/{{.InType.Path}}"
 
 	cloudevents "github.com/cloudevents/sdk-go"
 	"knative.dev/eventing-contrib/pkg/kncloudevents"
@@ -18,7 +19,7 @@ func handleEvent(event cloudevents.Event, resp *cloudevents.EventResponse) error
 	subject := event.Subject()
 	eventType := event.Type()
 
-	var data = &{{.InType.UpCaseTypeName}}{}
+	var data = &{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}{}
   err := event.DataAs(data)
 	if err != nil {
 		log.Printf("Error decoding event: %v", err)

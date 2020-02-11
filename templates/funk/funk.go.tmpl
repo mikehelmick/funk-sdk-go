@@ -1,8 +1,12 @@
 package funks
 
-import "github.com/mikehelmick/play/pkg/{{.InType.Path}}"
+import (
+  "log"
 
-func Funk{{.FunkName}}(id, source, subject, eventType string, event *{{.InType.UpCaseTypeName}}) error {
+  "github.com/mikehelmick/play/pkg/{{.InType.Path}}"
+)
+
+func Funk{{.FunkName}}(id, source, subject, eventType string, event *{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}) error {
   log.Printf("Received event of type %s with content %v", eventType, event)
   // TODO(you) Do something to handle the event.
 	return nil
