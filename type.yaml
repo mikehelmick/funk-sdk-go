@@ -1,0 +1,8 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: Type
+metadata:
+  name: funk-go-sdk
+spec:
+  template:
+    source: "templates/type/type.go.tmpl"
+    dest: "pkg/{{.Path}}/{{.TypeName}}.go"

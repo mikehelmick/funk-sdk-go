@@ -1,0 +1,13 @@
+// Generated type binding for CloudEvent type
+// {{.CEType}}
+//
+// Powered by fun(k)
+
+package {{.LastPart}}
+
+// {{.UpCaseTypeName}} is a generated struct for the
+// CloudEvent type {{.CEType}}
+type {{.UpCaseTypeName}} struct {
+  {{range .StructFields}} {{.Name}} {{if eq .FieldType "integer"}} int64 {{else}} {{.FieldType}} {{end}} {{.Tags}}
+  {{end}}
+}
