@@ -1,0 +1,8 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: SDKInit
+metadata:
+  name: funk-go-sdk-deploy
+spec:
+  steps:
+    - name: "Deploying Functions and Triggers"
+      exec: "ko apply -f config"
