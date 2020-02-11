@@ -1,0 +1,11 @@
+package funks
+
+import (
+        "log"
+        "net/http"
+)
+
+func Funk{{.FunkName}}(w http.ResponseWriter, r *http.Request) {
+  // TODO(you) - make stuff happen here!
+  w.Write([]byte("We want the fun(k)!"))
+}

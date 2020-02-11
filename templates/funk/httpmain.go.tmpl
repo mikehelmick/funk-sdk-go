@@ -1,0 +1,15 @@
+package main
+
+import (
+	"net/http"
+
+  "github.com/mikehelmick/play/pkg/funks"
+	"github.com/gorilla/mux"
+)
+
+func main() {
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/", funks.Funk{{.FunkName}}).Methods("GET", "POST")
+
+	http.ListenAndServe(":8080", router)
+}

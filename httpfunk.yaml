@@ -1,0 +1,26 @@
+apiVersion: funk.knative.dev/v1alpha1
+kind: SDKInit
+metadata:
+  name: funk-go-sdk
+spec:
+  steps:
+    - name: "Creating funk directory"
+      mkdir: "pkg/funks"
+    - name: "Create funk file"
+      template:
+        source: "templates/funk/httpfunk.go.tmpl"
+        dest: "pkg/funks/{{.LowerFunkName}}.go"
+    - name: "Creating main directory"
+      mkdir: "cmd/{{.LowerFunkName}}"
+    - name: "Create main"
+      template:
+        source: "templates/funk/httpmain.go.tmpl"
+        dest: "cmd/{{.LowerFunkName}}/main.go"
+    - name: "Create service yaml"
+      template:
+        source: "templates/funk/service.yaml"
+        dest: "config/{{.LowerFunkName}}_service.yaml"
+    - name: "Format go files"
+      exec: "gofmt -l -w ./"
+    - name: "Ensure dependencies"
+      exec: "dep ensure"
