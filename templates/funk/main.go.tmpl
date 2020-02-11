@@ -1,0 +1,42 @@
+// This would be moved to a shared main.
+
+package main
+
+import (
+	"context"
+	"log"
+
+  "github.com/mikehelmick/play/pkg/funks"
+
+	cloudevents "github.com/cloudevents/sdk-go"
+	"knative.dev/eventing-contrib/pkg/kncloudevents"
+)
+
+func handleEvent(event cloudevents.Event, resp *cloudevents.EventResponse) error {
+	id := event.ID()
+	source := event.Source()
+	subject := event.Subject()
+	eventType := event.Type()
+
+	var data = &{{.InType.UpCaseTypeName}}{}
+  err := event.DataAs(data)
+	if err != nil {
+		log.Printf("Error decoding event: %v", err)
+	}
+
+	err = funks.Funk{{.FunkName}}(id, source, subject, eventType, data)
+	if err != nil {
+		log.Printf("Error handling event: %v", err)
+	}
+
+	return err
+}
+
+func main() {
+	c, err := kncloudevents.NewDefaultClient()
+	if err != nil {
+		log.Fatal("Failed to create client, ", err)
+	}
+
+	log.Fatal(c.StartReceiver(context.Background(), handleEvent))
+}

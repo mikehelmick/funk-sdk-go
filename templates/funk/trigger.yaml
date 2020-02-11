@@ -1,0 +1,14 @@
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: funk-trigger-{{.LowerFunkName}}
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: "{{.InType.CEType}}"
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: funk-{{.LowerFunkName}}
