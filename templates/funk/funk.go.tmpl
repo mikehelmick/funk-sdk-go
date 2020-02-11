@@ -4,10 +4,11 @@ import (
   "log"
 
   "github.com/mikehelmick/play/pkg/{{.InType.Path}}"
+  cloudevents "github.com/cloudevents/sdk-go"
 )
 
-func Funk{{.FunkName}}(id, source, subject, eventType string, event *{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}) error {
-  log.Printf("Received event of type %s with content %v", eventType, event)
+func Funk{{.FunkName}}(data *{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}, event cloudevents.Event) error {
+  log.Printf("Received event of type %s with content %v", event.Type(), data)
   // TODO(you) Do something to handle the event.
 	return nil
 }

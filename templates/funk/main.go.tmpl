@@ -14,18 +14,13 @@ import (
 )
 
 func handleEvent(event cloudevents.Event, resp *cloudevents.EventResponse) error {
-	id := event.ID()
-	source := event.Source()
-	subject := event.Subject()
-	eventType := event.Type()
-
 	var data = &{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}{}
   err := event.DataAs(data)
 	if err != nil {
 		log.Printf("Error decoding event: %v", err)
 	}
 
-	err = funks.Funk{{.FunkName}}(id, source, subject, eventType, data)
+	err = funks.Funk{{.FunkName}}(data, event)
 	if err != nil {
 		log.Printf("Error handling event: %v", err)
 	}
