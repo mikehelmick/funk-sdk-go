@@ -6,5 +6,7 @@ import (
 
 func Funk{{.FunkName}}(w http.ResponseWriter, r *http.Request) {
   // TODO(you) - make stuff happen here!
-  w.Write([]byte("We want the fun(k)!"))
+  w.Write([]byte(`<html><head><title>fun(k)</title>
+    <body><div align="center"><h1>We want the fun(k)!</h1></div></body>
+    </html>`))
 }
