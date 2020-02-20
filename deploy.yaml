@@ -10,3 +10,11 @@ spec:
       exec: "dep ensure"
     - name: "Build Functions and Deploy Functions/Triggers"
       exec: "ko apply -f config"
+# To use buildpacks instead of ko, comment out the build step above and uncomment the steps below.
+#    - name: "Build to image"
+#      build:
+#        builder: "gcr.io/shef-gse/funk"
+#        dest: "gcr.io/shef-gse/funk-from-kn-deploy"
+#        main_path: "cmd/sayhello/main.go"
+#    - name: "Deploy Functions/Triggers"
+#      exec: "kubectl apply -f config"
