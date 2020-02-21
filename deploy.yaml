@@ -10,7 +10,8 @@ spec:
       exec: "dep ensure"
     - name: "Build Functions and Deploy Functions/Triggers"
       exec: "ko apply -f config"
-# To use buildpacks instead of ko, comment out the build step above and uncomment the steps below.
+# To use buildpacks instead of ko, comment out the build step above and uncomment the steps below. 
+# This is a sample for the current funk demo. This will be more configurable and a separate build step will be added.
 #    - name: "Build to image"
 #      build:
 #        builder: "gcr.io/shef-gse/funk"
