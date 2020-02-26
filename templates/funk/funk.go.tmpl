@@ -1,13 +1,16 @@
 package funks
 
 import (
+  "context"
   "log"
 
   "github.com/mikehelmick/play/pkg/{{.InType.Path}}"
   cloudevents "github.com/cloudevents/sdk-go"
 )
 
-func Funk{{.FunkName}}(data *{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}, event cloudevents.Event) error {
+func Funk{{.FunkName}}(ctx context.Context, data *{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}) error {
+  // The CloudEvent envelope is passed to you in the context.
+  event := ctx.Value("cloudevent").(cloudevents.Event)
   log.Printf("Received event of type %s with content %v", event.Type(), data)
   // TODO(you) Do something to handle the event.
 	return nil

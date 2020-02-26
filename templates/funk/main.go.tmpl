@@ -13,14 +13,16 @@ import (
 	"knative.dev/eventing-contrib/pkg/kncloudevents"
 )
 
-func handleEvent(event cloudevents.Event, resp *cloudevents.EventResponse) error {
+func handleEvent(ctx context.Context, event cloudevents.Event, resp *cloudevents.EventResponse) error {
 	var data = &{{.InType.LastPart}}.{{.InType.UpCaseTypeName}}{}
   err := event.DataAs(data)
 	if err != nil {
 		log.Printf("Error decoding event: %v", err)
 	}
 
-	err = funks.Funk{{.FunkName}}(data, event)
+  ctx = context.WithValue(ctx, "cloudevent", event)
+
+	err = funks.Funk{{.FunkName}}(ctx, data)
 	if err != nil {
 		log.Printf("Error handling event: %v", err)
 	}
